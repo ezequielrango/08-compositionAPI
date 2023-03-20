@@ -33,7 +33,7 @@ export default {
         ironman.value.age = 49
       },
       changeHulk : () => {
-        hulk.value.age = 30
+        hulk.age = 30
       }
      }
   }
