@@ -1,38 +1,40 @@
 <template>
-    <h1>Counter view</h1>
-    <h2>{{counter}}</h2>
+    <div class="counterContainer">
+        <h1>Counter view</h1>
+        <h2>{{counter}}</h2>
+    
+        <button @click="increase">+1</button>
+        <button @click="decrease">-1</button>
 
-    <button @click="increase">+1</button>
-    <button @click="decrease">-1</button>
+    </div>
 
 </template>
 
 <script>
-import { ref } from 'vue';
+import useCounter from '@/composables/useCounter'
 
     export default{
         name: 'Counter',
         props: {},
         emits: [],
         setup() {
-            const counter = ref(5)
 
+            const { counter, increase, decrease} = useCounter(25)
 
-            const increase = () => {
-                counter.value++
-            }
-
-            const decrease = () => {
-                counter.value--
-            }
             return {
-                counter,
-                increase,
-                decrease
+                counter, increase, decrease
             }
         }
     }
 </script>
-<style>
-
+<style scoped>
+.counterContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+button{
+    width: 50%;
+}
 </style>
