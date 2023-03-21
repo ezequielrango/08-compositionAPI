@@ -1,21 +1,21 @@
 <template>
     <div class="textContainer">
-        <h2>Espere por favor</h2>
-        <h2>Usuarios</h2>
-        <h5>Error en la carga</h5>
-        <div>
+        <h2 v-if="isLoading">Espere por favor</h2>
+        <h2 v-else>Usuarios</h2>
+        <h5 v-if="users.length === 0">Error en la carga</h5>
+        <div v-if="users.length > 0">
             <ul>
-                <li>
-                    <h4>nombre</h4>
-                    <h6>email@mail.com</h6>
+                <li v-for="{first_name, last_name, id , email} in users" :key="id">
+                    <h4>{{first_name}} - {{ last_name }}</h4>
+                    <h6>{{email}}</h6>
                 </li>
             </ul>
         </div>
         <div class="btnContainer">
     
-            <button>Atrás</button>
-            <button>Siguiente</button>
-            <span>Página: 5</span>
+            <button @click="previousPage">Atrás</button>
+            <button @click="nextPage">Siguiente</button>
+            <span>Página: {{currentPage}}</span>
         </div>
     </div>
 </template>
@@ -45,13 +45,23 @@ export default {
             if (data.data.length > 0 ) {
                 users.value = data.data
                 currentPage.value = page
+                errorMessage.value = null
             } else if( currentPage.value > 0){
                 errorMessage.value = 'No hay más usuarios'
             }
-            console.log(data);
+            isLoading.value = false
 
         }
         getUsers()
+        return {
+            users,
+            isLoading,
+            currentPage,
+            errorMessage,
+
+            nextPage : () => getUsers(currentPage.value + 1),
+            previousPage : () => getUsers(currentPage.value - 1),
+        }
     }
 }
 </script>
