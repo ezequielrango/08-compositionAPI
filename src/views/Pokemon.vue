@@ -4,21 +4,25 @@
   <template v-else>
     <h3>{{ pokemon.name }}</h3>
     <img :src="pokemon.sprites.front_default" :alt="pokemon.name">
-  <router-link :to="{name: 'pokemon-search'}" > Regresar</router-link>
+  <router-link :to="{name: 'pokemon-search'}" >Regresar</router-link>
   </template>
 </template>
 
 <script>
 import usePokemon from '../composables/usePokemon'
-
+import { watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 export default {
  setup() {
     const route = useRoute()
     console.log(route.params);
-    const {pokemon,isLoading,errorMessage} = usePokemon(route.params.id)
+    const {pokemon,isLoading,errorMessage ,searchPokemon} = usePokemon(route.params.id)
  
+    watch(
+        () => route.params.id,
+        () => searchPokemon(route.params.id)
+    )
 
     return {
         pokemon,
