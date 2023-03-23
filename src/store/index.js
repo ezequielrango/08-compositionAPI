@@ -36,6 +36,11 @@ export default createStore({
     actions: {
 
     },
+    getters:{
+        pendingTodos(state, getters){
+            return state.todos.filter(todo => !todo.completed)
+        }
+    },
     modules: {
 
     }
