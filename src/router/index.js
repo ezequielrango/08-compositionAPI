@@ -48,6 +48,14 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/Pokemon.vue')
     },
+    {
+      path: '/todo',
+      name: 'todo',
+      // route level code-splitting
+      // this generates a separate chunk (pokemon-search.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/TodoVuex.vue')
+    },
   ]
 })
 
