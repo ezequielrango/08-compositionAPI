@@ -15,6 +15,8 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink :to="{name: 'users'}">Users</RouterLink>
         <RouterLink :to="{name: 'pokemon-search'}">Buscar</RouterLink>
         <RouterLink :to="{name: 'todo'}">To do</RouterLink>
+        <RouterLink :to="{name: 'slots'}">Slots</RouterLink>
+
 
       </nav>
     </div>
