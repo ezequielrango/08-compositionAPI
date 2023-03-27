@@ -1,7 +1,16 @@
 <template>
     <div class="modal-background fade-in">
         <div class="modal-container">
-            <h1>Hola Mundo</h1>
+           
+            
+            <slot name="header"></slot>
+            <slot name="body"></slot>
+            <slot name="footer"></slot>
+            <!-- <slot>
+                <div class="center">
+                    ésto aparecerá si no hay contenido enviado desde el customSlots
+                </div>
+            </slot> -->
         </div>
     </div>
 </template>
@@ -10,7 +19,7 @@
 
 
 export default {
-    setup(){
+    setup(props, context){
 
     }
 }
