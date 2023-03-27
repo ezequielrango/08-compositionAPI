@@ -9,6 +9,8 @@
             <slot name="header"></slot>
             <slot name="body"></slot>
             <slot name="footer"></slot>
+
+            <slot name="exposed" :newTitle="newTitle"></slot>
             <!-- <slot>
                 <div class="center">
                     ésto aparecerá si no hay contenido enviado desde el customSlots
@@ -22,16 +24,15 @@
 
 
 export default {
-    props: {
-        title: {
-            type : String,
-            required: true
-        },
-    },
+    props: ['title'],
     emits : ['on:close'],
 
     setup(props, context){
         console.log({props, context});
+
+        return{
+            newTitle: props.title?.toUpperCase()
+        }
     }
 }
 </script>
