@@ -1,5 +1,8 @@
 <template>
-    <div class="modal-background fade-in">
+    <div class="modal-background fade-in"
+    @click.self="$emit('on:close')"
+    >
+    <!-- con click.self  se va a disparar solamente si clickeo al elemento padre -->
         <div class="modal-container">
            
             
@@ -19,8 +22,16 @@
 
 
 export default {
-    setup(props, context){
+    props: {
+        title: {
+            type : String,
+            required: true
+        },
+    },
+    emits : ['on:close'],
 
+    setup(props, context){
+        console.log({props, context});
     }
 }
 </script>
