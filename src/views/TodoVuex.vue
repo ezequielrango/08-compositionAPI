@@ -18,24 +18,52 @@
             </li>
         </ul>
     </div>
+    <button @click="isOpen=true">Crear Todo</button>
+    <modal v-if="isOpen"
+        @on:close="isOpen=false">
+        <template v-slot:header>
+            <h1>Nueva tarea</h1>
+        </template>
+
+        <template v-slot:body>
+            <form @submit.prevent="createTodo(newTodoText)">
+                <input 
+                    type="text" 
+                    placeholder="Nueva tarea"
+                    v-model="newTodoText"
+                    >        
+                <button type="submit">Crear</button>          
+            </form>
+            <br>
+            <br>
+        </template>
+    </modal>
+    
 </template>
 
 <script>
 import useTodos from '../composables/useTodos'
+import Modal from '../components/Modal.vue'
+import { ref } from 'vue'
 
 export default {
+    components: { Modal },
     setup() {
 
         const { pending,
             currentTab,
             getTodosByTab,
-            toggleTodo } = useTodos()
+            toggleTodo, 
+            createTodo } = useTodos()
 
             return{
                 pending,
                 currentTab,
                 getTodosByTab,
-                toggleTodo
+                toggleTodo,
+                isOpen: ref(false),
+                newTodoText: ref(''),
+                createTodo
             }
     }
 }
